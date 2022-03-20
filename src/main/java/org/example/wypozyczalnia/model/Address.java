@@ -55,6 +55,9 @@ public class Address {
         this.miasto = miasto;
     }
 
+    public Address() {
+    }
+
     @Override
     public String toString() {
         return "Address{" +

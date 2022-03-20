@@ -1,36 +1,31 @@
 package org.example.wypozyczalnia.database;
 
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-import org.example.wypozyczalnia.model.RentingPosition;
+import org.example.wypozyczalnia.model.Car;
+import org.example.wypozyczalnia.model.Client;
+import org.example.wypozyczalnia.model.Vehicle;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CSVRentingFileDatabase {
-
-    private static CSVRentingFileDatabase csvRentingFileDatabase;
+public class CSVCarDatabase {
+    private static CSVCarDatabase csvCarDatabase;
     private String fileName;
 
-    private CSVRentingFileDatabase(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public static CSVRentingFileDatabase getInstance(String fileName) {
-        if(csvRentingFileDatabase == null) {
-            csvRentingFileDatabase = new CSVRentingFileDatabase(fileName);
+    public static CSVCarDatabase getInstance(String fileName) {
+        if (csvCarDatabase ==null) {
+            csvCarDatabase = new CSVCarDatabase(fileName);
         }
-        return csvRentingFileDatabase;
+        return csvCarDatabase;
     }
 
+    private CSVCarDatabase(String fileName) {this.fileName = fileName;}
 
-    public void saveRentingPosition(RentingPosition position) {
+    public void saveCarPosition(Car position) {
         try {
             FileWriter fileWriter = new FileWriter(fileName, true);
             fileWriter.write(position.toString() + System.getProperty("line.separator"));
@@ -40,7 +35,7 @@ public class CSVRentingFileDatabase {
         }
     }
 
-    public List<RentingPosition>  loadAllRentingPositions() {
+    public List<Car> loadAllCars() {
         List<String[]> parametersList = new ArrayList<>();
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
             parametersList = reader.readAll();
@@ -49,10 +44,14 @@ public class CSVRentingFileDatabase {
             e.printStackTrace();
         }
 
-        List<RentingPosition> rentingPositions = parametersList.stream()
-                .map((p) -> new RentingPosition(p))
+        List<Car> car = parametersList.stream()
+                .map((p) -> new Car(p))
                 .collect(Collectors.toList());
 
-        return  rentingPositions;
+        return  car;
+    }
+
+    public Car getCarById(int id) {
+        return null;
     }
 }

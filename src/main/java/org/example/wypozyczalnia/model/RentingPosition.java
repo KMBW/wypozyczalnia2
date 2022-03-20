@@ -4,28 +4,32 @@ import java.time.LocalDateTime;
 
 public class RentingPosition {
 
+    private static int counter = 1;
     private int id;
-    private String carName;
+    private int carId;
     private LocalDateTime startRentDate;
     private LocalDateTime endRentDate;
-    private int cost;
+    private int clientId;
 
-    public RentingPosition(int id, String carName, LocalDateTime startRentDate, LocalDateTime endtRentDate, int cost) {
-        this.id = id;
-        this.carName = carName;
+    public RentingPosition(int carId, LocalDateTime startRentDate, LocalDateTime endRentDate, int clientId) {
+        this.id = counter++;
+        this.carId = carId;
         this.startRentDate = startRentDate;
-        this.endRentDate = endtRentDate;
-        this.cost = cost;
+        this.endRentDate = endRentDate;
+        this.clientId = clientId;
     }
 
     public RentingPosition(String[] properties) {
         this.id = Integer.parseInt(properties[0]);
-        this.carName = properties[1];
+        this.carId = Integer.parseInt(properties[1]);
         this.startRentDate = LocalDateTime.parse(properties[2]);
         this.endRentDate = LocalDateTime.parse(properties[3]);
-        this.cost = Integer.parseInt(properties[4]);
+        this.clientId = Integer.parseInt(properties[4]);
+
 
     }
+
+
 
     public int getId() {
         return id;
@@ -35,13 +39,6 @@ public class RentingPosition {
         this.id = id;
     }
 
-    public String getCarName() {
-        return carName;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
-    }
 
     public LocalDateTime getStartRentDate() {
         return startRentDate;
@@ -59,16 +56,9 @@ public class RentingPosition {
         this.endRentDate = endRentDate;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 
     @Override
     public String toString() {
-        return id + "," + carName + "," + startRentDate + "," + endRentDate + "," + cost;
+        return id + "," + carId + "," + startRentDate + "," + endRentDate + ","  + clientId;
     }
 }
