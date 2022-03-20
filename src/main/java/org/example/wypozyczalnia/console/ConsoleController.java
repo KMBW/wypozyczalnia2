@@ -35,7 +35,9 @@ public class ConsoleController {
                 String marka = scanner.next();
                 System.out.println("Podaj model \n");
                 String model = scanner.next();
-                service.addCar(new Car(marka, model));
+                System.out.println("Podaj koszt wynajmu \n");
+                String cost = scanner.next();
+                service.addCar(new Car (marka, model, cost));
                 System.out.println("Pomyślnie dodano pojazd");
             }
 

@@ -7,6 +7,7 @@ public class Car {
     private String model;
     private int cost;
 
+
     public int getId() {
         return id;
     }
@@ -43,14 +44,16 @@ public class Car {
             this.id = Integer.parseInt(properties[0]);
             this.marka = properties[1];
             this.model = properties[2];
+            this.cost = Integer.parseInt(properties[3]);
         }
 
     public Car() {
     }
 
-    public Car(String marka, String model) {
+    public Car(String marka, String model, String cost) {
         this.marka = marka;
         this.model = model;
+        this.cost = Integer.parseInt(cost);
     }
 
     @Override
