@@ -18,7 +18,7 @@ public class ConsoleController {
     public void Menu() {
         while(true) {
             System.out.println("Wybierz akcję \n");
-            System.out.println("1. Dodaj klienta | 2. Dodaj Pojazd | 3. Dodaj wypożyczenie ");
+            System.out.println("1. Dodaj klienta | 2. Dodaj Pojazd | 3. Dodaj wypożyczenie | 4. Wyświetl wszystkie wypożyczenia ");
             int input = scanner.nextInt();
             if(input == 1) {
                 System.out.println("Podaj imię \n");
