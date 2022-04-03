@@ -52,6 +52,7 @@ public class CSVCarDatabase {
     }
 
     public Car getCarById(int id) {
-        return null;
+        List<Car> cars = loadAllCars();
+        return cars.stream().filter((car) -> car.getId()==id).collect(Collectors.toList()).get(0);
     }
 }

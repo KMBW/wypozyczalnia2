@@ -8,6 +8,10 @@ public class Client {
     private String email;
     private Address adres;
 
+    public static void setCounter(int counter) {
+        Client.counter = counter;
+    }
+
     public int getId() {
         return id;
     }

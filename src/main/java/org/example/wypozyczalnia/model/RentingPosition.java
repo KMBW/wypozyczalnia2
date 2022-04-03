@@ -1,6 +1,7 @@
 package org.example.wypozyczalnia.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class RentingPosition {
 
@@ -10,6 +11,8 @@ public class RentingPosition {
     private LocalDateTime startRentDate;
     private LocalDateTime endRentDate;
     private int clientId;
+    int totalCost;
+    boolean oplacono;
 
     public RentingPosition(int carId, LocalDateTime startRentDate, LocalDateTime endRentDate, int clientId) {
         this.id = counter++;
@@ -25,11 +28,35 @@ public class RentingPosition {
         this.startRentDate = LocalDateTime.parse(properties[2]);
         this.endRentDate = LocalDateTime.parse(properties[3]);
         this.clientId = Integer.parseInt(properties[4]);
+        this.totalCost = Integer.parseInt(properties[5]);
+        this.oplacono = Boolean.parseBoolean(properties[6]);
 
 
     }
 
+    public static void setCounter(int counter) {
+        RentingPosition.counter = counter;
+    }
 
+    public int getTotalCost() {
+        return totalCost;
+    }
+
+    public boolean czyOplacono() {
+        return oplacono;
+    }
+
+    public void setTotalCost(int totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public void setOplacono(boolean oplacono) {
+        this.oplacono = oplacono;
+    }
+
+    public int getCarId() {
+        return carId;
+    }
 
     public int getId() {
         return id;
@@ -38,7 +65,6 @@ public class RentingPosition {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public LocalDateTime getStartRentDate() {
         return startRentDate;
@@ -56,9 +82,11 @@ public class RentingPosition {
         this.endRentDate = endRentDate;
     }
 
-
+    public long getRentingPeriodInDays() {
+        return ChronoUnit.DAYS.between(startRentDate, endRentDate);
+    }
     @Override
     public String toString() {
-        return id + "," + carId + "," + startRentDate + "," + endRentDate + ","  + clientId;
+        return id + "," + carId + "," + startRentDate + "," + endRentDate + ","  + clientId + "," + totalCost + "," + oplacono;
     }
 }

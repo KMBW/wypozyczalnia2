@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class ConsoleController {
     Scanner scanner = new Scanner(System.in);
+    // renting position service jest fasadą
     RentingPositionService service = new RentingPositionService();
 
 
@@ -35,9 +36,9 @@ public class ConsoleController {
                 String marka = scanner.next();
                 System.out.println("Podaj model \n");
                 String model = scanner.next();
-                System.out.println("Podaj koszt wynajmu \n");
-                String cost = scanner.next();
-                service.addCar(new Car (marka, model, cost));
+                System.out.println("Podaj maksymalna predkość samochodu w kilometrach na godzine \n");
+                int maksymalnaPredkosc = Integer.parseInt(scanner.next());
+                service.addCar(new Car (marka, model), maksymalnaPredkosc);
                 System.out.println("Pomyślnie dodano pojazd");
             }
 
@@ -45,13 +46,28 @@ public class ConsoleController {
                 System.out.println("Podaj ID Samochodu \n");
                 int carId = Integer.parseInt(scanner.next());
                 System.out.println("Podaj datę wypożyczenia \n");
-                LocalDateTime startRentDate = LocalDateTime.parse(scanner.next());
+                System.out.println("Podaj rok \n");
+                int rokStart = Integer.parseInt(scanner.next());
+                System.out.println("Podaj miesiac \n");
+                int miesiacStart = Integer.parseInt(scanner.next());
+                System.out.println("Podaj dzien \n");
+                int dzienStart = Integer.parseInt(scanner.next());
+                LocalDateTime startRentDate = LocalDateTime.of(rokStart, miesiacStart, dzienStart, 0, 0);
                 System.out.println("Podaj datę oddania \n");
-                LocalDateTime endRentDate = LocalDateTime.parse(scanner.next());
+                System.out.println("Podaj rok \n");
+                int rokEnd = Integer.parseInt(scanner.next());
+                System.out.println("Podaj miesiac \n");
+                int miesiacEnd = Integer.parseInt(scanner.next());
+                System.out.println("Podaj dzien \n");
+                int dzienEnd = Integer.parseInt(scanner.next());
+                LocalDateTime endRentDate = LocalDateTime.of(rokEnd, miesiacEnd, dzienEnd, 0, 0);
                 System.out.println("Podaj ID Klienta \n");
                 int clientId = Integer.parseInt(scanner.next());
                 service.rentCar(new RentingPosition(carId, startRentDate, endRentDate, clientId));
                 System.out.println("Pomyślnie dodano wypożyczenie");
+            }
+            if (input == 4) {
+                System.out.println(service.showAllRentingPositions());
             }
 
 

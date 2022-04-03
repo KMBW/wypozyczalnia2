@@ -7,6 +7,11 @@ public class Car {
     private String model;
     private int cost;
 
+    public Car(String marka, String model) {
+        this.marka = marka;
+        this.model = model;
+    }
+
 
     public int getId() {
         return id;
@@ -40,6 +45,9 @@ public class Car {
         this.cost = cost;
     }
 
+    public static void setCounter(int counter) {
+        Car.counter = counter;
+    }
     public Car (String[] properties) {
             this.id = Integer.parseInt(properties[0]);
             this.marka = properties[1];
