@@ -12,11 +12,24 @@ import java.time.LocalDateTime;
 public class Main {
     public static void main(String[] args) {
 
-        /* RentingPosition rentingPosition = new RentingPosition(1, LocalDateTime.now(), LocalDateTime.now(), 1);
-        RentingPositionService rentingPositionService = new RentingPositionService();
-        rentingPositionService.rentCar(rentingPosition);
-        rentingPositionService.showAllRentingPositions().forEach(rentingPosition1 -> System.out.println(rentingPosition1.toString())); */
-
+        CSVClientDatabase csvClientDatabase = CSVClientDatabase.getInstance("clients.csv");
+        CSVCarDatabase csvCarDatabase = CSVCarDatabase.getInstance("Car.csv");
+        CSVRentingFileDatabase csvRentingFileDatabase = CSVRentingFileDatabase.getInstance("rentingPosition.csv");
+        List<Car> cars = csvCarDatabase.loadAllCars();
+        Car carWithMaxId = cars.stream()
+                .max(Comparator.comparingInt(car -> car.getId()))
+                .get();
+        Car.setCounter(carWithMaxId.getId() + 1);
+        List<Client> clients = csvClientDatabase.loadAllClients();
+        Car clientWithMaxId = cars.stream()
+                .max(Comparator.comparingInt(client -> client.getId()))
+                .get();
+        Client.setCounter(clientWithMaxId.getId() + 1);
+        List<RentingPosition> rentingPositions = csvRentingFileDatabase.loadAllRentingPositions();
+        RentingPosition rentingPostitionWithMaxId = rentingPositions.stream()
+                .max(Comparator.comparingInt(rentingPosition -> rentingPosition.getId()))
+                .get();
+        RentingPosition.setCounter(rentingPostitionWithMaxId.getId() + 1);
        ConsoleController consoleController = new ConsoleController();
        consoleController.Menu();
 

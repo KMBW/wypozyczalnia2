@@ -18,9 +18,7 @@ public class CSVRentingFileDatabase {
     private static CSVRentingFileDatabase csvRentingFileDatabase;
     private String fileName;
 
-    private CSVRentingFileDatabase(String fileName) {
-        this.fileName = fileName;
-    }
+    private CSVRentingFileDatabase(String fileName) {this.fileName = fileName;}
 
     public static CSVRentingFileDatabase getInstance(String fileName) {
         if(csvRentingFileDatabase == null) {
@@ -44,15 +42,12 @@ public class CSVRentingFileDatabase {
         List<String[]> parametersList = new ArrayList<>();
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
             parametersList = reader.readAll();
-            //parametersList.forEach(x -> System.out.println(Arrays.toString(x)));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         List<RentingPosition> rentingPositions = parametersList.stream()
                 .map((p) -> new RentingPosition(p))
                 .collect(Collectors.toList());
-
         return  rentingPositions;
     }
 }

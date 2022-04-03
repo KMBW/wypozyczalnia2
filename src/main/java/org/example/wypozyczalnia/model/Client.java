@@ -71,4 +71,5 @@ public class Client {
     public String toString() {
         return id + "," + imie + "," + nazwisko + "," + email;
     }
+
 }

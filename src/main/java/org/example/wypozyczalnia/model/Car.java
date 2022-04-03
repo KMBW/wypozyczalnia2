@@ -47,8 +47,6 @@ public class Car {
             this.cost = Integer.parseInt(properties[3]);
         }
 
-    public Car() {
-    }
 
     public Car(String marka, String model, String cost) {
         this.marka = marka;
