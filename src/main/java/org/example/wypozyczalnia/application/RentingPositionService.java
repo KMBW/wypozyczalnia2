@@ -62,4 +62,6 @@ public class RentingPositionService {
     public List<RentingPosition> showAllRentingPositions(){
         return csvRentingFileDatabase.loadAllRentingPositions();
     }
+    public List<Client> showAllClients() {return csvClientDatabase.loadAllClients();}
+    public List<Car> showAllCars() {return csvCarDatabase.loadAllCars();}
 }

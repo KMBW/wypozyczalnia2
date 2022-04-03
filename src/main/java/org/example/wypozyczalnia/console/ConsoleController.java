@@ -18,7 +18,7 @@ public class ConsoleController {
     public void Menu() {
         while(true) {
             System.out.println("Wybierz akcję \n");
-            System.out.println("1. Dodaj klienta | 2. Dodaj Pojazd | 3. Dodaj wypożyczenie | 4. Wyświetl wszystkie wypożyczenia ");
+            System.out.println("1. Dodaj klienta | 2. Dodaj Pojazd | 3. Dodaj wypożyczenie | 4. Wyświetl wszystkie wypożyczenia | 5. Wyświetl wszystkich klientów | 6. Wyświetl wszystkie samochody");
             int input = scanner.nextInt();
             if(input == 1) {
                 System.out.println("Podaj imię \n");
@@ -68,6 +68,14 @@ public class ConsoleController {
             }
             if (input == 4) {
                 System.out.println(service.showAllRentingPositions());
+            }
+
+            if (input == 5) {
+                System.out.println(service.showAllClients());
+            }
+
+            if (input == 6) {
+                System.out.println(service.showAllCars());
             }
 
 
