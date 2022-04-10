@@ -2,9 +2,14 @@ package org.example.wypozyczalnia.console;
 
 
 import org.example.wypozyczalnia.application.RentingPositionService;
+import org.example.wypozyczalnia.database.CSVRentingFileDatabase;
+import org.example.wypozyczalnia.iterator.Collection;
+import org.example.wypozyczalnia.iterator.Iterator;
 import org.example.wypozyczalnia.model.Car;
 import org.example.wypozyczalnia.model.Client;
 import org.example.wypozyczalnia.model.RentingPosition;
+import org.example.wypozyczalnia.template.AddRecord;
+import org.example.wypozyczalnia.template.AddRentingPosition;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -13,7 +18,7 @@ public class ConsoleController {
     Scanner scanner = new Scanner(System.in);
     // renting position service jest fasadą
     RentingPositionService service = new RentingPositionService();
-
+    AddRecord addRecordService;
 
     public void Menu() {
         while(true) {
@@ -43,6 +48,7 @@ public class ConsoleController {
             }
 
             if(input == 3) {
+                addRecordService = new AddRentingPosition(CSVRentingFileDatabase.getInstance("rentingPosition.csv"));
                 System.out.println("Podaj ID Samochodu \n");
                 int carId = Integer.parseInt(scanner.next());
                 System.out.println("Podaj datę wypożyczenia \n");
@@ -63,11 +69,18 @@ public class ConsoleController {
                 LocalDateTime endRentDate = LocalDateTime.of(rokEnd, miesiacEnd, dzienEnd, 0, 0);
                 System.out.println("Podaj ID Klienta \n");
                 int clientId = Integer.parseInt(scanner.next());
-                service.rentCar(new RentingPosition(carId, startRentDate, endRentDate, clientId));
+                addRecordService.addRecord(new RentingPosition(carId, startRentDate, endRentDate, clientId));
+                //service.rentCar(new RentingPosition(carId, startRentDate, endRentDate, clientId));
                 System.out.println("Pomyślnie dodano wypożyczenie");
             }
             if (input == 4) {
-                System.out.println(service.showAllRentingPositions());
+                Collection<RentingPosition> collection = service.showAllRentingPositions();
+                Iterator<RentingPosition> iterator = collection.createIterator();
+                System.out.println(iterator.getCurrent());
+                while(iterator.hasNext()) {
+                    System.out.println(iterator.getNext());
+                }
+
             }
 
             if (input == 5) {

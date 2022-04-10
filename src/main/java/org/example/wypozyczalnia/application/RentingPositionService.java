@@ -4,6 +4,7 @@ package org.example.wypozyczalnia.application;
 import org.example.wypozyczalnia.database.CSVCarDatabase;
 import org.example.wypozyczalnia.database.CSVClientDatabase;
 import org.example.wypozyczalnia.database.CSVRentingFileDatabase;
+import org.example.wypozyczalnia.iterator.RentingPositionsCollection;
 import org.example.wypozyczalnia.model.Car;
 import org.example.wypozyczalnia.model.Client;
 import org.example.wypozyczalnia.model.RentingPosition;
@@ -59,8 +60,8 @@ public class RentingPositionService {
         }
     }
 
-    public List<RentingPosition> showAllRentingPositions(){
-        return csvRentingFileDatabase.loadAllRentingPositions();
+    public RentingPositionsCollection showAllRentingPositions(){
+        return new RentingPositionsCollection(csvRentingFileDatabase.loadAllRentingPositions());
     }
     public List<Client> showAllClients() {return csvClientDatabase.loadAllClients();}
     public List<Car> showAllCars() {return csvCarDatabase.loadAllCars();}

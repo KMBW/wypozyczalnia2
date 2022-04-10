@@ -2,8 +2,9 @@ package org.example.wypozyczalnia.model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 
-public class RentingPosition {
+public class RentingPosition implements Record{
 
     private static int counter = 1;
     private int id;
@@ -85,6 +86,17 @@ public class RentingPosition {
     public long getRentingPeriodInDays() {
         return ChronoUnit.DAYS.between(startRentDate, endRentDate);
     }
+
+    public HashMap<String, String> getPropertiesForValidation() {
+        HashMap<String, String> properties = new HashMap<>();
+        properties.put("carId", Integer.toString(carId));
+        properties.put("startRentDate", startRentDate.toString());
+        properties.put("endRentDate", endRentDate.toString());
+        properties.put("totalCost", Integer.toString(totalCost));
+        properties.put("oplacono", Boolean.toString(oplacono));
+        return properties;
+    }
+
     @Override
     public String toString() {
         return id + "," + carId + "," + startRentDate + "," + endRentDate + ","  + clientId + "," + totalCost + "," + oplacono;

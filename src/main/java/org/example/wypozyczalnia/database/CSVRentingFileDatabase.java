@@ -37,6 +37,15 @@ public class CSVRentingFileDatabase {
             e.printStackTrace();
         }
     }
+    public void saveRentingPosition(String csv) {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(csv + System.getProperty("line.separator"));
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<RentingPosition>  loadAllRentingPositions() {
         List<String[]> parametersList = new ArrayList<>();

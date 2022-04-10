@@ -1,6 +1,8 @@
 package org.example.wypozyczalnia.model;
 
-public class Car {
+import java.util.HashMap;
+
+public class Car implements Record {
     private static int counter = 1;
     private int id = counter++;
     private String marka;
@@ -62,7 +64,14 @@ public class Car {
         this.cost = Integer.parseInt(cost);
     }
 
-    @Override
+    public HashMap<String, String> getPropertiesForValidation() {
+        HashMap<String, String> properties = new HashMap<>();
+        properties.put("marka", marka);
+        properties.put("model", model);
+        properties.put("cost", Integer.toString(cost));
+        return properties;
+    }
 
+    @Override
     public String toString() {return id + "," + marka + "," + model + "," + cost;}
 }
