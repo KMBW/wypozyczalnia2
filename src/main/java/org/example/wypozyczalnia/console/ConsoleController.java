@@ -84,11 +84,21 @@ public class ConsoleController {
             }
 
             if (input == 5) {
-                System.out.println(service.showAllClients());
+                Collection<Client> collection = service.showAllClients();
+                Iterator<Client> iterator = collection.createIterator();
+                System.out.println(iterator.getCurrent());
+                while(iterator.hasNext()) {
+                    System.out.println(iterator.getNext());
+                }
             }
 
             if (input == 6) {
-                System.out.println(service.showAllCars());
+                Collection<Car> collection = service.showAllCars();
+                Iterator<Car> iterator = collection.createIterator();
+                System.out.println(iterator.getCurrent());
+                while(iterator.hasNext()) {
+                    System.out.println(iterator.getNext());
+                }
             }
 
 
